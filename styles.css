@@ -119,3 +119,52 @@ footer {
         max-width: 90%;
     }
 }
+@keyframes drip-animation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+}
+
+.drip {
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 15px;
+    background-color: rgba(255, 0, 0, 0.8);
+    border-radius: 50%;
+    animation: drip-animation 2s infinite linear;
+}
+.art-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.art-item {
+    text-align: center;
+    max-width: 250px;
+}
+
+.art-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.art-item img:hover {
+    transform: scale(1.1);
+}
+
+.art-label {
+    margin-top: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}

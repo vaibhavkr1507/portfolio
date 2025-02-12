@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("Website Loaded");
+    console.log("Gallery Page Loaded");
 
-    // Image Modal Functionality
-    const images = document.querySelectorAll(".art-grid img");
+    const images = document.querySelectorAll(".gallery-grid img");
+
     images.forEach(img => {
         img.addEventListener("click", function() {
             const modal = document.createElement("div");
@@ -18,30 +18,47 @@ document.addEventListener("DOMContentLoaded", function() {
             modal.querySelector(".close").addEventListener("click", function() {
                 modal.remove();
             });
-        });
-    });
 
-    // Mobile Menu Toggle
-    const nav = document.querySelector("nav ul");
-    const menuToggle = document.createElement("div");
-    menuToggle.classList.add("menu-toggle");
-    menuToggle.innerHTML = "☰";
-    document.querySelector("nav").prepend(menuToggle);
-
-    menuToggle.addEventListener("click", function() {
-        nav.classList.toggle("active");
-    });
-
-    // Smooth Scroll for Navigation Links
-    document.querySelectorAll("nav ul li a").forEach(anchor => {
-        anchor.addEventListener("click", function(event) {
-            if (this.getAttribute("href").startsWith("#")) {
-                event.preventDefault();
-                const section = document.querySelector(this.getAttribute("href"));
-                if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
+            modal.addEventListener("click", function(event) {
+                if (event.target === modal) {
+                    modal.remove();
                 }
-            }
+            });
         });
     });
+
+    // Adjust Go Back Button on Mobile
+    function adjustBackButton() {
+        const backButton = document.querySelector(".back-home");
+        if (window.innerWidth <= 768) {
+            backButton.style.position = "relative";
+            backButton.style.display = "block";
+            backButton.style.textAlign = "center";
+            backButton.style.margin = "10px auto";
+        } else {
+            backButton.style.position = "absolute";
+            backButton.style.left = "10px";
+            backButton.style.top = "10px";
+        }
+    }
+
+    adjustBackButton();
+    window.addEventListener("resize", adjustBackButton);
+
+    // Dripping Effect Animation for Header
+    const header = document.querySelector("header");
+    for (let i = 0; i < 10; i++) {
+        let drop = document.createElement("div");
+        drop.classList.add("drip");
+        drop.style.left = `${Math.random() * 100}%`;
+        drop.style.animationDelay = `${Math.random() * 2}s`;
+        drop.style.width = "10px";
+        drop.style.height = "15px";
+        drop.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+        drop.style.position = "absolute";
+        drop.style.top = "0";
+        drop.style.borderRadius = "50%";
+        drop.style.animation = "drip-animation 2s infinite linear";
+        header.appendChild(drop);
+    }
 });
